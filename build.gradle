@@ -35,6 +35,9 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+	implementation 'com.theokanning.openai-gpt3-java:api:0.18.2'
+    implementation 'com.theokanning.openai-gpt3-java:client:0.18.2'
+    implementation 'com.theokanning.openai-gpt3-java:service:0.18.2'
 }
 
 processResources {

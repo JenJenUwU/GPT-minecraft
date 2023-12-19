@@ -9,10 +9,12 @@ import net.minecraft.text.Text;
 public class AccessOpenAI {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("gpt")
+                //.requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.argument("input", StringArgumentType.greedyString())
                         .executes(context -> run(context.getSource(), context.getArgument("input", String.class)))
                 )
         );
+
     }
 
     public static int run(ServerCommandSource source, String input) {
