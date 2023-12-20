@@ -12,6 +12,5 @@ public class GPTMinecraft implements ModInitializer {
     @Override
     public void onInitialize() {
         ModRegistries.register();
-        LOGGER.info("Hello Fabric world!");
     }
 }

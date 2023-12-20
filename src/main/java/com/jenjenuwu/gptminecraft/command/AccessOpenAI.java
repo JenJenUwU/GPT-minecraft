@@ -1,5 +1,6 @@
 package com.jenjenuwu.gptminecraft.command;
 
+import com.jenjenuwu.gptminecraft.openAI.OpenAiModel;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.server.command.CommandManager;
@@ -18,7 +19,10 @@ public class AccessOpenAI {
     }
 
     public static int run(ServerCommandSource source, String input) {
-        source.sendFeedback(() -> Text.of("You entered: " + input), false);
+        source.sendFeedback(() -> Text.of("Response: " + OpenAiModel.getResponse(input, "You are a system that built for translating player's requirements into Minecraft commands. " +
+                "Your only task it to provide translated commands with line breaks. " +
+                "Don't teach the player to do anything and don't ask or explain anything. " +
+                "The commands should be executable without any modification. ")), false);
         return 1;
     }
 }
