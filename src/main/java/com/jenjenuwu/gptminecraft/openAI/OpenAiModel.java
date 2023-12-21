@@ -20,7 +20,7 @@ public class OpenAiModel {
     }
 
     private static OpenAiService createOpenAiService() {
-        return new OpenAiService("token");
+        return new OpenAiService("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");
     }
 
     public static String getResponse(String userPrompt, String systemPrompt) {
