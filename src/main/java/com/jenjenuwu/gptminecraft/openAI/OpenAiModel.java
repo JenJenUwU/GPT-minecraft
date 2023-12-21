@@ -20,7 +20,7 @@ public class OpenAiModel {
     }
 
     private static OpenAiService createOpenAiService() {
-        return new OpenAiService("KEY");
+        return new OpenAiService("token");
     }
 
     public static String getResponse(String userPrompt, String systemPrompt) {
