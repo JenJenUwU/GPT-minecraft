@@ -1,40 +1,42 @@
 {
-	"schemaVersion": 1,
-	"id": "gpt-minecraft",
-	"version": "${version}",
-	"name": "GPT-Minecraft",
-	"description": "This is a mod that integrates ChatGPT API into Minecraft!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "MIT",
-	"icon": "assets/gpt-minecraft/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"com.jenjenuwu.gptminecraft.GPTMinecraft"
-		],
-		"client": [
-			"com.jenjenuwu.gptminecraft.GPTMinecraftClient"
-		],
-		"fabric-datagen": [
-			"com.jenjenuwu.gptminecraft.GPTMinecraftDataGenerator"
-		]
-	},
-	"mixins": [
-		"gpt-minecraft.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.15.2",
-		"minecraft": "~1.20.4",
-		"java": ">=17",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "gpt-minecraft",
+  "version": "${version}",
+  "name": "GPT-Minecraft",
+  "description": "This is a mod that integrates ChatGPT API into Minecraft!",
+  "authors": [
+    "JenJenUwU"
+  ],
+  "contact": {
+    "repo": "https://github.com/JenJenUwU/GPT-minecraft"
+  },
+  "license": "MIT",
+  "icon": "assets/gpt-minecraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.jenjenuwu.gptminecraft.GPTMinecraft"
+    ],
+    "client": [
+      "com.jenjenuwu.gptminecraft.GPTMinecraftClient"
+    ],
+    "fabric-datagen": [
+      "com.jenjenuwu.gptminecraft.GPTMinecraftDataGenerator"
+    ],
+    "modmenu": [
+      "com.jenjenuwu.gptminecraft.gui.ModMenu"
+    ]
+  },
+  "mixins": [
+    "gpt-minecraft.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.2",
+    "minecraft": "~1.20.4",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }

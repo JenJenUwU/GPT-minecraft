@@ -1,5 +1,6 @@
 package com.jenjenuwu.gptminecraft;
 
+import com.jenjenuwu.gptminecraft.config.ModConfig;
 import com.jenjenuwu.gptminecraft.util.ModRegistries;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ public class GPTMinecraft implements ModInitializer {
     @Override
     public void onInitialize() {
         ModRegistries.register();
+        ModConfig.init();
     }
 
 
