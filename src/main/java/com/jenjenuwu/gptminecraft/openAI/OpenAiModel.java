@@ -20,8 +20,8 @@ public class OpenAiModel {
                 .model("gpt-4")
                 .messages(Prompt)
                 .build();
-
     }
+
 
     private static OpenAiService createOpenAiService() {
         return new OpenAiService(config.getApiKey());
@@ -31,9 +31,9 @@ public class OpenAiModel {
         try {
             return createOpenAiService().createChatCompletion(createChatCompletionRequestBuilder(getMessages(userPrompt, systemPrompt))).getChoices().get(0).getMessage().getContent().trim();
         } catch (Exception e) {
-            // Handle exceptions appropriately in your application
             e.printStackTrace();
         }
         return null;
     }
+
 }

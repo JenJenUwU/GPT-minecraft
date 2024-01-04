@@ -2,7 +2,6 @@ package com.jenjenuwu.gptminecraft.command;
 
 import com.jenjenuwu.gptminecraft.GPTMinecraft;
 import com.jenjenuwu.gptminecraft.openAI.OpenAiModel;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.client.MinecraftClient;
@@ -13,6 +12,10 @@ import net.minecraft.text.Text;
 import java.util.List;
 
 public class AccessOpenAI {
+    private static boolean allIsMinecraftCommand(List<String> inputs) {
+        return inputs.stream().allMatch(input -> input.startsWith("/"));
+    }
+
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("gpt")
                 .then(CommandManager.literal("minecraft")
@@ -44,14 +47,23 @@ public class AccessOpenAI {
                 "Don't teach the player to do anything and don't ask or explain anything. " +
                 "The commands should be executable without any modification. ");
         GPTMinecraft.LOGGER.info("Minecraft command processed: " + response);
-        List<String> commands = List.of(response.split("\n")).stream().filter(s -> !s.isBlank()).toList();
-        commands.forEach(command -> {
-            GPTMinecraft.LOGGER.info("Executing command: " + command);
-            source.sendFeedback(() -> Text.of("Executing command: " + command), false);
-            MinecraftClient minecraftClient = MinecraftClient.getInstance();
-            CommandManager commandManager = minecraftClient.getServer().getCommandManager();
-            commandManager.executeWithPrefix(source, command);
-        });
+        if (response == null) {
+            source.sendFeedback(() -> Text.of("Unable to retrieve response from OpenAI, please set your API key first."), false);
+        } else {
+            List<String> commands = List.of(response.split("\n")).stream().filter(s -> !s.isBlank()).toList();
+            if (!allIsMinecraftCommand(commands)) {
+                source.sendFeedback(() -> Text.of("Unable to retrieve valid Minecraft commands from OpenAI, please try again."), false);
+            } else {
+                commands.forEach(command -> {
+                    GPTMinecraft.LOGGER.info("Executing command: " + command);
+                    source.sendFeedback(() -> Text.of("Executing command: " + command), false);
+                    MinecraftClient minecraftClient = MinecraftClient.getInstance();
+                    CommandManager commandManager = minecraftClient.getServer().getCommandManager();
+                    commandManager.executeWithPrefix(source, command);
+                });
+            }
+        }
+
         return 1;
     }
 }
